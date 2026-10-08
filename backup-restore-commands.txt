@@ -1,0 +1,18 @@
+# Task 6 - Backup and Restore
+
+# Backup company_advanced using gzip
+mongodump --db company_advanced --archive=company_advanced.archive --gzip
+
+# Restore into a new database
+mongorestore --archive=company_advanced.archive --gzip --nsFrom="company_advanced.*" --nsTo="company_advanced_restore.*"
+
+# Verify restored database
+mongosh
+
+use company_advanced_restore
+
+show collections
+
+db.employees.countDocuments()
+db.departments.countDocuments()
+db.sessions.countDocuments()
